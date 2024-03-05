@@ -5,7 +5,7 @@ setup(
     version='0.1.7',
     author='Jordan Castro',
     author_email='jordan@grupojvm.com',
-    description='**PyMake** is a simple build tool for C/C++ projects.',
+    description='**PyMake** is a simple build tool for C/C++ projects replacing CMake.',
     packages=find_packages(),
     classifiers=[
         'Programming Language :: Python :: 3',
