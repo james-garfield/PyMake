@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pymake_cli',
-    version='0.1.6',
+    version='0.1.7',
     author='Jordan Castro',
     author_email='jordan@grupojvm.com',
     description='**PyMake** is a simple build tool for C/C++ projects.',
@@ -18,7 +18,7 @@ setup(
     python_requires='>=3.6',
     entry_points={
         'console_scripts': [
-            'pymake-cli=pymake_cli.pymake_cli:cli'
+            'pymk=pymake_cli.pymake_cli:cli'
         ]
     }
 )

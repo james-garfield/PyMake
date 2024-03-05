@@ -9,14 +9,14 @@ from . import utils
 @click.command()
 @click.argument('config_file', required=False, default="config.yaml")
 @click.option('-d', '--debug', is_flag=True, help='Enable debug mode')
-def init(config_name, debug):
+def init(config_file, debug):
     # Check that it is a existing path
-    if os.path.exists(config_name):
-        utils.debug_print(f"Config file {config_name} already exists", debug)
+    if os.path.exists(config_file):
+        utils.debug_print(f"Config file {config_file} already exists", debug)
         exit(3)
     # Build the default config
-    build_file.build_file(config_name)
-    utils.debug_print(f"Created config file {config_name}", debug)
+    build_file.build_file(config_file)
+    utils.debug_print(f"Created config file {config_file}", debug)
 
 
 @click.command()
@@ -60,11 +60,11 @@ def update(config_file, debug, new):
 
 @click.command()
 @click.argument('config_file', required=False, default="config.yaml")
+@click.argument('which', required=False, default='all')
 @click.option('-d', '--debug', is_flag=True, help='Enable debug mode')
-def shell(config_file, debug):
-    # This is more "CMakelists.txt" style, where you can run shell commands before building.
+def shell(config_file, which, debug):
     pymake = PyMake(config_file, debug)
-    pymake.run_shell_commands()
+    pymake.run_shell_commands(which)
 
 
 @click.command()

@@ -1,7 +1,7 @@
 
 # This handles building the project
 
-compiler: g++ # Change to whatever will compile your c/c++ code. You can even use emscripten!
+compiler: gcc # Change to whatever will compile your c/c++ code. You can even use emscripten!
 name: App name # The name of the project, used for debugging.
 output: app.exe # The output file.
 
@@ -30,6 +30,12 @@ includes:
 # This is more (CMake) style, where you can run shell commands before building. 
 # Also, you can run shell commands after building.
 shell:
+    before: 
+        - echo "Building project..."
+        # - "path/to/emsdk_env"
+        # - echo "Connected EMSDK"
     after:
         - app.exe # Usually you want to run the program after building it.
         - del app.exe
+    misc:
+        - echo "This is a shell command that can run independently of the build process."

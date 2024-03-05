@@ -52,7 +52,7 @@ def build_file_with_data(current_config):
         data = yaml.safe_load(f)
 
     outline = {
-        "compiler": "g++",
+        "compiler": "gcc",
         "name": "App name",
         "output": "app.exe",
         "flags": [],
@@ -62,7 +62,8 @@ def build_file_with_data(current_config):
         "libraries": [],
         "shell": {
             "before": [],
-            "after": []
+            "after": [],
+            "misc": []
         }
     }
     # Load data into outline

@@ -92,12 +92,35 @@ class PyMake:
         build = self.config['output'].replace("/", "\\")
         subprocess.call(build, shell=True)
 
-    def run_shell_commands(self):
+    def run_shell_commands(self, which:str):
         # This is to run shell commands separately from building
         utils.debug_print("Running shell commands", self.debug_mode)
-        if "shell" in self.config:
-            shells = self.config["shell"].get("before", []) + self.config["shell"].get("after", [])
-            self.run_shell(shells)
+        if not "shell" in self.config:
+            utils.debug_print("No shell in config", self.debug_mode)
+            return
+        
+        shells_to_run = []
+        shells: dict = self.config['shell']
+
+        match which:
+            case 'all':
+                shells_to_run.append(shells.get('before', []))
+                shells_to_run.append(shells.get('after', []))
+                shells_to_run.append(shells.get('misc', []))
+            case 'before':
+                shells_to_run.append(shells.get('before', []))
+            case 'after':
+                shells_to_run.append(shells.get('after', []))
+            case 'seq':
+                shells_to_run.append(shells.get('before', []))
+                shells_to_run.append(shells.get('after', []))
+            case 'misc':
+                shells_to_run.append(shells.get('misc', []))
+            case _:
+                utils.debug_print(f"Which: {which} is not a valid option for shell", self.debug_mode)
+                return
+
+        self.run_shell(shells_to_run)
 
     def run_shell(self, shells):
         for shell in shells:
