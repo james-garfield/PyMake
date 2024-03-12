@@ -7,7 +7,7 @@ from . import utils
 
 
 @click.command()
-@click.argument('config_file', required=False, default="config.yaml")
+@click.argument('config_file', required=False, default="pymk.yaml")
 @click.option('-d', '--debug', is_flag=True, help='Enable debug mode')
 def init(config_file, debug):
     # Check that it is a existing path
@@ -20,7 +20,7 @@ def init(config_file, debug):
 
 
 @click.command()
-@click.argument('config_file', required=False, default="config.yaml")
+@click.argument('config_file', required=False, default="pymk.yaml")
 @click.option('-d', '--debug', is_flag=True, help='Enable debug mode')
 @click.option('-s', '--shell', is_flag=True, help='Run shell commands before building')
 def build(config_file, debug, shell):
@@ -33,7 +33,7 @@ def build(config_file, debug, shell):
 
 
 @click.command()
-@click.argument('config_file', required=False, default="config.yaml")
+@click.argument('config_file', required=False, default="pymk.yaml")
 @click.option('-d', '--debug', is_flag=True, help='Enable debug mode')
 def run(config_file, debug):
     # Run a c/c++ project
@@ -42,7 +42,7 @@ def run(config_file, debug):
 
 
 @click.command()
-@click.argument('config_file', required=False, default="config.yaml")
+@click.argument('config_file', required=False, default="pymk.yaml")
 @click.option('-d', '--debug', is_flag=True, help='Enable debug mode')
 @click.option('-n', '--new', is_flag=True, help='Create a new config file')
 def update(config_file, debug, new):
@@ -59,18 +59,12 @@ def update(config_file, debug, new):
 
 
 @click.command()
-@click.argument('config_file', required=False, default="config.yaml")
+@click.argument('config_file', required=False, default="pymk.yaml")
 @click.argument('which', required=False, default='all')
 @click.option('-d', '--debug', is_flag=True, help='Enable debug mode')
 def shell(config_file, which, debug):
     pymake = PyMake(config_file, debug)
     pymake.run_shell_commands(which)
-
-
-@click.command()
-def fallback():
-    # A fallback command for when the user doesn't specify a command
-    print("Please specify a command. Use --help for help.")
 
 
 @click.group()
@@ -79,7 +73,6 @@ def cli():
 
 cli.add_command(init)
 cli.add_command(build)
-cli.add_command(fallback)
 cli.add_command(run)
 cli.add_command(update)
 cli.add_command(shell)

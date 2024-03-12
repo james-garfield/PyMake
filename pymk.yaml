@@ -11,12 +11,11 @@ flags:
 
 # The c/c++ files that will be compiled in order. 
 files: 
-    - src/utils.cpp
-    - src/main.cpp
+    - main.cpp
 
 # Where are the header files located?
-includes:
-   - src/include/
+# includes:
+#    - include/
 
 # Not to be confused with libraries, these are the paths to the libraries.
 # libs:
@@ -29,13 +28,10 @@ includes:
 # Shell commands to run before or after building.
 # This is more (CMake) style, where you can run shell commands before building. 
 # Also, you can run shell commands after building.
-shell:
-    before: 
-        - echo "Building project..."
-        # - "path/to/emsdk_env"
-        # - echo "Connected EMSDK"
-    after:
-        - app.exe # Usually you want to run the program after building it.
-        - del app.exe
-    misc:
-        - echo "This is a shell command that can run independently of the build process."
+# shell:
+#     before:
+#         - echo "Hello, world!"
+#     after:
+#         - app.exe # Usually you want to run the program after building it.
+#         - echo "Goodbye, world!"
+

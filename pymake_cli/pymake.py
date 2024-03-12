@@ -89,8 +89,7 @@ class PyMake:
     def run(self):
         utils.debug_print("Running program", self.debug_mode)
         # Run program
-        build = self.config['output'].replace("/", "\\")
-        subprocess.call(build, shell=True)
+        subprocess.call(self.config['output'], shell=True)
 
     def run_shell_commands(self, which:str):
         # This is to run shell commands separately from building
