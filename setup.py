@@ -1,8 +1,9 @@
 from setuptools import setup, find_packages
+from . import version
 
 setup(
     name='pymake_cli',
-    version='0.1.7',
+    version=version.VERSION,
     author='Jordan Castro',
     author_email='jordan@grupojvm.com',
     description='**PyMake** is a simple build tool for C/C++ projects replacing CMake.',

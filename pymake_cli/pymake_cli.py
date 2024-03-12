@@ -4,7 +4,7 @@ import click
 from .pymake import PyMake
 from . import build_file
 from . import utils
-
+from ..version import VERSION
 
 @click.command()
 @click.argument('config_file', required=False, default="pymk.yaml")
@@ -65,6 +65,11 @@ def update(config_file, debug, new):
 def shell(config_file, which, debug):
     pymake = PyMake(config_file, debug)
     pymake.run_shell_commands(which)
+
+
+@click.command()
+def version():
+    print(VERSION)
 
 
 @click.group()
