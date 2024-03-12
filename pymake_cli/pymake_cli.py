@@ -4,7 +4,6 @@ import click
 from .pymake import PyMake
 from . import build_file
 from . import utils
-from ..version import VERSION
 
 @click.command()
 @click.argument('config_file', required=False, default="pymk.yaml")
@@ -69,7 +68,7 @@ def shell(config_file, which, debug):
 
 @click.command()
 def version():
-    print(VERSION)
+    print('0.1.8')
 
 
 @click.group()
@@ -81,6 +80,7 @@ cli.add_command(build)
 cli.add_command(run)
 cli.add_command(update)
 cli.add_command(shell)
+cli.add_command(version)
 
 
 if __name__ == "__main__":
