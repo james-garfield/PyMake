@@ -25,7 +25,7 @@ class PyMake:
         with open(config_file, 'r') as f:
             self.config = yaml.safe_load(f)
 
-    def add_flags(self, flag, arguments, add_slash=True, add_dash=True):
+    def add_flags(self, flag, arguments, add_slash=True, add_dash=True, add_quotes=False):
         """
         Add flags to the command.
 
@@ -35,9 +35,10 @@ class PyMake:
         - add_slash (bool): Whether to add a slash after each argument.
         """
         dash = "-" if add_dash else ""
+        quote = '"' if add_quotes else ""
         # Add flags
         for arg in arguments:
-            self.command += f' {dash}{flag}{arg}'
+            self.command += f' {dash}{flag}{quote}{arg}{quote}'
             if add_slash:
                 self.command += " / \n"
             elif arguments[-1] == arg:
@@ -60,9 +61,9 @@ class PyMake:
         ]
         actions = {
             "compiler": lambda x: f'{x}',
-            "files": lambda x: self.add_flags("", x, add_dash=False),
-            "includes": lambda x: self.add_flags("I", x),
-            "libs": lambda x: self.add_flags("L", x),
+            "files": lambda x: self.add_flags("", x, add_dash=False, add_quotes=True),
+            "includes": lambda x: self.add_flags("I", x, add_quotes=True),
+            "libs": lambda x: self.add_flags("L", x, add_quotes=True),
             "libraries": lambda x: self.add_flags("l", x),
             "flags": lambda x: self.add_flags("", x, add_slash=False),
         }
