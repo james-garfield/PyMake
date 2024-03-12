@@ -78,3 +78,6 @@ pymake-cli run
 ### Things I am working on
 - [ ] Update command. The current command leaves the new config file disorganized.
 - [ ] Add tests.
+- [ ] Init should have specific templates you can choose from. i.e. (wasm, )
+- [ ] Add a pymkenv/ folder to save C/C++ projects
+    - [ ] Download into pymkenv using `pymk install`
