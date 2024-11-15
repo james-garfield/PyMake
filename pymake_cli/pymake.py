@@ -1,19 +1,23 @@
 import yaml
 import subprocess
 from . import utils
+from .ai_file_searcher import AiFileSearch
+from .build_file import update_yaml_config
 
 
 class PyMake:
     command = ""
     debug_mode = False
     config:dict = {}
+    config_file:str = ""
 
-    def __init__(self, config_file="config.yaml", debug_mode=False):
+    def __init__(self, config_file="pymk.yaml", debug_mode=False):
         self.debug_mode = debug_mode
+        self.config_file = config_file
         self.load_config(config_file)
 
     def load_config(self, config_file):
-        if not config_file.endswith(".yaml"):
+        if not config_file.endswith(".yaml") and not config_file.endswith(".yml"):
             utils.debug_print("Config file must be a .yaml file", self.debug_mode)
             exit(1)
 
@@ -43,7 +47,25 @@ class PyMake:
                 self.command += " / \n"
             elif arguments[-1] == arg:
                     break
+            
+    def ai_generate(self, entry: str):
+        """
+        Generate the pymk.yaml file using AI search.
+        """
+        ai_file_search = AiFileSearch(entry)
+        ai_file_search.ai_generate()
 
+        # new config data
+        new_config_data = {
+            'includes': []
+        }
+
+        for include in ai_file_search.get_header_locations():
+            new_config_data["includes"].append(include)
+
+        # let's do it time.
+        update_yaml_config(self.config_file, new_config_data, "test.yml")
+        
     def build(self):
         if self.config == {}:
             utils.debug_print("Config is empty", self.debug_mode)

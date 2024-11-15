@@ -1,14 +1,16 @@
 
 # This handles building the project
 
-compiler: None # Change to whatever will compile your c/c++ code. You can even use emscripten!
-name: None # The name of the project, used for debugging.
-output: None # The output file.
+compiler: g++ # Change to whatever will compile your c/c++ code. You can even use emscripten!
+name: App name # The name of the project, used for debugging.
+output: app.exe # The output file.
 
 # These are the flags that will be passed to the compiler, such as -std=c++17
 
-#flags:
-#  - std=c++17
+flags: 
+
+    - std=c++17
+
 
 
 # The c/c++ files that will be compiled in order. 
@@ -19,8 +21,10 @@ output: None # The output file.
 
 # Where are the header files located?
 
-#includes:
-#  - includes/
+includes:
+
+    - C:/Users/jorda/Documents/PyMakeCli/example/src/include
+
 
 
 # Not to be confused with libraries, these are the paths to the libraries.
@@ -38,14 +42,22 @@ output: None # The output file.
 # Shell commands to run before or after building.
 shell:
   
-  #before:
-  #  - echo hello world
+  before:
+  
+    - echo "Building project..."
   
   
-  #after:
-  #  - echo bye world
+  
+  after:
+  
+    - app.exe
+  
+    - del app.exe
   
   
-  #misc:
-  #  - echo misc call
+  
+  misc:
+  
+    - echo "This is a shell command that can run independently of the build process."
+  
   

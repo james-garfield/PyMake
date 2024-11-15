@@ -81,3 +81,5 @@ pymake-cli run
 - [ ] Init should have specific templates you can choose from. i.e. (wasm, )
 - [ ] Add a pymkenv/ folder to save C/C++ projects
     - [ ] Download into pymkenv using `pymk install`
+- [ ] Cache for faster build times.
+- [ ] AI generate, command for resolving include and cpp config using AI.
